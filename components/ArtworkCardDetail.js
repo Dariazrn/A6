@@ -2,7 +2,7 @@ import { Card, Button } from "react-bootstrap";
 import { favouritesAtom } from "../store";
 import { useAtom } from "jotai";
 import { useEffect, useState } from "react";
-import { addToFavourites, removeFromFavourites } from "../lib/UserData";
+import { addToFavourites, removeFromFavourites } from "../lib/userData";
 import Error from "next/error";
 import useSWR from "swr";
 import Link from "next/link";
