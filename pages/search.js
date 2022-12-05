@@ -1,13 +1,10 @@
-import React, { useEffect } from "react";
-import {useRouter} from 'next/router';
-import {useForm} from 'react-hook-form';
-import Form from 'react-bootstrap/Form';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Button from 'react-bootstrap/Button';
-import { searchHistoryAtom } from "../store";
-import { useAtom } from "jotai";
-
+import {  Col, Row, Button, Form } from 'react-bootstrap';
+import { useForm } from 'react-hook-form';
+import { useRouter } from 'next/router';
+import { useAtom } from 'jotai';
+import { searchHistoryAtom } from '../store';
+import {addToHistory} from "../lib/userData";
+import {useEffect } from 'react';
 const AdvancedSearch = () => {
 
     const router = useRouter();

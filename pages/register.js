@@ -1,7 +1,8 @@
 import { Card, Form, Button, Alert } from "react-bootstrap";
+import { useState } from 'react';
 import { registerUser } from "../lib/authenticate";
-import { useState } from "react";
-import { useRouter } from "next/router";
+import { useRouter } from 'next/router';
+import { useAtom } from "jotai";
 
 export default function Register(props) {
   const [userName, setUserName] = useState("");

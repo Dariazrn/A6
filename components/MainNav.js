@@ -1,46 +1,40 @@
-import {useRouter} from 'next/router';
-import {useState} from 'react';
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button';
-import Link from "next/link";
-import { useForm } from "react-hook-form";
+import { Container, Nav, Navbar, Form, Button, NavDropdown } from "react-bootstrap";
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
 import { useAtom } from "jotai";
 import { searchHistoryAtom } from "../store";
 import { addToHistory } from "../lib/userData";
-import NavDropdown from "react-bootstrap/NavDropdown";
 import { removeToken, readToken } from "../lib/authenticate";
-
 function MainNav() {
-  const { register, handleSubmit } = useForm({
-    defaultValues: {
-      q: "",
-    },
-  });
-  const router = useRouter();
+
+   const router = useRouter();
   const [searchField, setSearchField] = useState("");
-
-  const [isExpanded, setExpended] = useState(false);
-
+  const [isExpanded, setExpanded] = useState(false);
   const [searchHistory, setSearchHistory] = useAtom(searchHistoryAtom);
+
   function logout() {
-    setExpended(false);
+    setExpanded(false);
     removeToken();
     router.push("/login");
   }
   async function submitForm(e) {
     e.preventDefault();
-    setExpended(false);
-    let queryString = `title=true&q=${searchField}`;
-    router.push("/artwork?" + queryString);
-    setSearchHistory(await addToHistory(`title=true&q=${searchField}`));
+
+    if (searchField != "") {
+
+      router.push(`/artwork?title=true&q=${searchField}`);
+      setSearchField("");
+      setExpanded(false);
+      setSearchHistory(await addToHistory(`title=true&q=${searchField}`));
+    }
+
   }
 
   let token = readToken();
+
   const toggle = () => {
-    setExpended((isExpanded) => !isExpanded);
+    setExpanded((isExpanded) => !isExpanded);
   };
   
   return (
