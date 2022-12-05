@@ -5,7 +5,7 @@
 *  distributed to other students.
 * 
 *  Name: Daria Zyrianova Student ID: 121782205 Date: December 4, 2022
-*  Vercel App (Deployed) Link: https://a6-fxd8rgc9a-dariazrn.vercel.app/
+*  Vercel App (Deployed) Link: https://a6-c6abti7r7-dariazrn.vercel.app/
 *
 ********************************************************************************/ 
 
