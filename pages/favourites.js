@@ -5,28 +5,26 @@ import { Row, Col, Card } from "react-bootstrap";
 import ArtworkCard from "../components/ArtworkCard";
 
 export default function Favorites() {
-  const router = useRouter();
-  let finalQuery = router.asPath.split("?")[1];
-  const [favouritesList, setFavouritesList] = useAtom(favouritesAtom);
-
-  if (!favouritesList) return null; 
+  const [favouritesList] = useAtom(favouritesAtom);
+  
+  if(!favouritesList) return null;
 
   return (
     <>
-      <Row className="gy-4">
-        {favouritesList.length == 0 ? (
-          <Card>
-            <h4>Nothing Here. Try adding some new artwork to the list.</h4>
-          </Card>
-        ) : (
+      {favouritesList.length > 0 ?
 
-          favouritesList.map((objectIDs) => (
-            <Col lg={3} key={objectIDs}>
-              <ArtworkCard objectID={objectIDs} />
-            </Col>
-          ))
-        )}
-      </Row>
+        <Row className="gy-4">{favouritesList.map(objID => (
+          <Col lg={3} key={objID}><ArtworkCard objectID={objID} /></Col>
+        ))}</Row>
+
+        :
+
+        <Card>
+          <Card.Body>
+            <div>Nothing Here</div>Try adding some new artwork to the list.
+          </Card.Body>
+        </Card>
+      }
     </>
-  );
+  )
 }

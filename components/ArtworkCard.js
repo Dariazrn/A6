@@ -26,15 +26,15 @@ export default function ArtworkCard(props){
                             <strong>Date: </strong> {data?.objectDate ? data?.objectDate : 'N\/A'}<br />
                             <strong>Classification: </strong> {data?.classification ? data?.classification : 'N\/A'}<br />
                             <strong>medium: </strong> {data?.medium ? data?.medium : 'N\/A'}<br /><br />
-                            <Link href={'/artwork/' + props.objectID} passHref>
+                            
+                        </Card.Text>
+                        <Link href={'/artwork/' + props.objectID} passHref>
                             <Button variant="outline-dark"><strong>ID: </strong>{props.objectID}</Button>
                         </Link>
-                        </Card.Text>
                         
                     </Card.Body>
                 </Card>
-          </>);
-          }else{
-            return null;
-          }
-        }
+            </>
+          );
+    }
+}

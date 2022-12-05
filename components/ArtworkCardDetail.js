@@ -35,8 +35,7 @@ export default function ArtworkCardDetail(props) {
       }
     
       if (error) return <Error statusCode={404} />;
-      if (!data) return <div>loading...</div>;
-    
+
         return (
             <>
                 <Card>
@@ -53,10 +52,9 @@ export default function ArtworkCardDetail(props) {
                             <br />
                             <strong>Credit Line: </strong> {data?.creditLine ? data?.creditLine : 'N/A'}<br />
                             <strong>Dimensions: </strong> {data?.dimensions ? data?.dimensions : 'N/A'}<br />
-                            <Button variant={showAdded ? "primary" : "outline-primary"} onClick={favouritesClicked}>
-                            {" "} {showAdded ? "+ Favourite (added)" : "+ Favourite"} </Button>    
+                            <Button variant={showAdded ? "primary" : "outline-primary"} onClick={favouritesClicked}>+ Favourite {showAdded && "( added )"}</Button> 
                         </Card.Text>
-                        
+       
                        
                     </Card.Body>
                 </Card>

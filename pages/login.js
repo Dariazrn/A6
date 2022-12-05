@@ -9,18 +9,20 @@ import { favouritesAtom, searchHistoryAtom } from '../store';
 
 
 export default function Login(props) {
+  const router = useRouter();
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [warning, setWarning] = useState("");
   const [favouritesList, setFavouritesList] = useAtom(favouritesAtom);
   const [searchHistory, setSearchHistory] = useAtom(searchHistoryAtom);
-  const router = useRouter();
+
 
   async function updateAtoms() {
     setFavouritesList(await getFavourites());
     setSearchHistory(await getHistory());
   }
-  async function handleSubmit(e) {
+
+  async function submitForm(e) {
     e.preventDefault();
 
     try {
@@ -36,11 +38,11 @@ export default function Login(props) {
     <>
       <Card bg="light">
         <Card.Body>
-          <h2>Login</h2>Enter your login information below:
+          <div>Login</div>Enter your login information below:
         </Card.Body>
       </Card>
       <br />
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={submitForm}>
         <Form.Group>
           <Form.Label>User:</Form.Label>
           <Form.Control
@@ -56,16 +58,14 @@ export default function Login(props) {
           <Form.Label>Password:</Form.Label>
           <Form.Control
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
             type="password"
             id="password"
             name="password"
+            onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Group>
         <br />
-        <Button variant="primary" className="pull-right" type="submit">
-          Login
-        </Button>
+        <Button variant="primary" className="pull-right" type="submit">Login</Button>
         <br />
         <br />
         {warning && <Alert variant="danger">{warning}</Alert>}

@@ -11,7 +11,7 @@ export default function Register(props) {
 
   const router = useRouter();
 
-  async function handleSubmit(e) {
+  async function submitForm(e) {
     e.preventDefault();
     try {
       await registerUser(userName, password, password2);
@@ -25,11 +25,11 @@ export default function Register(props) {
     <>
       <Card bg="light">
         <Card.Body>
-          <h2>Register</h2>Enter your register information below:
+          <div>Register</div>Enter your register information below:
         </Card.Body>
       </Card>
       <br />
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={submitForm}>
         <Form.Group>
           <Form.Label>User:</Form.Label>
           <Form.Control
@@ -45,10 +45,10 @@ export default function Register(props) {
           <Form.Label>Password:</Form.Label>
           <Form.Control
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
             type="password"
             id="password"
             name="password"
+            onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Group>
         <br />
@@ -56,10 +56,10 @@ export default function Register(props) {
           <Form.Label>Confirm Password:</Form.Label>
           <Form.Control
             value={password2}
-            onChange={(e) => setPassword2(e.target.value)}
             type="password"
             id="password"
             name="password2"
+            onChange={(e) => setPassword2(e.target.value)}
           />
         </Form.Group>
         <br />
