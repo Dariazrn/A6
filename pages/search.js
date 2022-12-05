@@ -90,7 +90,7 @@ const AdvancedSearch = () => {
                                           name="geoLocation"  
                                           {...register("geoLocation")} />
                             <Form.Text className="text-muted">
-                                Case Sensitive String (ie "Europe", "France", "Paris", "China", "New York", etc.), with multiple values separated by the | operator
+                                Case Sensitive String (ie Europe&quot; France&quot; Paris&quot; &apos;China&apos;&quot; &apos;New York&apos;&quot; etc)&quot; with multiple values separated by the | operator
                             </Form.Text>
                         </Form.Group>
                     </Col>
@@ -102,7 +102,7 @@ const AdvancedSearch = () => {
                                           name="medium"  
                                           {...register("medium")}/>
                             <Form.Text className="text-muted">
-                                Case Sensitive String (ie: "Ceramics", "Furniture", "Paintings", "Sculpture", "Textiles", etc.), with multiple values separated by the | operator
+                                Case Sensitive String (ie: &apos;Ceramics&apos;&quot; &apos;Furniture&apos;&quot; &apos;Paintings&apos;&quot; &apos;Sculpture&apos;&quot; &apos;Textiles&apos;&quot; etc.), with multiple values separated by the | operator
                             </Form.Text>
                         </Form.Group>
                     </Col>

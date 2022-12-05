@@ -1,45 +1,48 @@
-const PUBLIC_PATHS = ['/login','/register', '/', '/_error'];
-import { isAuthenticated } from '../lib/authenticate';
-import { useRouter } from 'next/router';
-import {useState, useEffect} from 'react';
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
+import { isAuthenticated } from "../lib/authenticate";
 import { useAtom } from "jotai";
-import { searchHistoryAtom, favouritesAtom } from "../store";
-import { getFavourites, getHistory } from "../lib/UserData";
+import { favouritesAtom, searchHistoryAtom } from "../store";
+import { getFavourites, getHistory } from "../lib/userData";
 
-
+const PUBLIC_PATHS = ["/login", "/", "/_error", "/register"];
 
 export default function RouteGuard(props) {
+  const router = useRouter();
+  const [authorized, setAuthorized] = useState(false);
+
   const [searchHistory, setSearchHistory] = useAtom(searchHistoryAtom);
   const [favouritesList, setFavouritesList] = useAtom(favouritesAtom);
+
   async function updateAtoms() {
     setFavouritesList(await getFavourites());
     setSearchHistory(await getHistory());
   }
 
-  const router = useRouter();
+  useEffect(() => {
+    // on initial load - run auth check
+    authCheck(router.pathname);
+    updateAtoms();
 
-  const [authorized, setAuthorized] = useState(false)
+    // on route change complete - run auth check
+    router.events.on("routeChangeComplete", authCheck);
 
+    // unsubscribe from events in useEffect return function
+    return () => {
+      router.events.off("routeChangeComplete", authCheck);
+    };
+  }, []);
 
   function authCheck(url) {
-    const path = url.split('?')[0];
+    // redirect to login page if accessing a private page and not logged in
+    const path = url.split("?")[0];
     if (!isAuthenticated() && !PUBLIC_PATHS.includes(path)) {
       setAuthorized(false);
-      router.push('/login');
+      router.push("/login");
     } else {
       setAuthorized(true);
     }
   }
 
-  useEffect(()=>{
-    updateAtoms();
-    authCheck(router.pathname);
-    router.events.on('routeChangeComplete', authCheck);
-
-    return () => {
-      router.events.off('routeChangeComplete', authCheck);
-    };
-  }, []);  
-
-  return <>{authorized && props.children}</>
+  return <>{authorized && props.children}</>;
 }
